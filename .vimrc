@@ -17,6 +17,9 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'einars/js-beautify'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'heavenshell/vim-jsdoc'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/tComment'
+Plugin 'Lokaltog/vim-easymotion'
 
 filetype plugin on
 
