@@ -18,12 +18,13 @@ Plugin 'maksimr/vim-jsbeautify'
 Plugin 'heavenshell/vim-jsdoc'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/tComment'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'michalliu/jsruntime.vim'
-Plugin 'michalliu/jsoncodecs.vim'
-Plugin 'michalliu/sourcebeautify.vim'
+" Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'michalliu/jsruntime.vim'
+" Plugin 'michalliu/jsoncodecs.vim'
+" Plugin 'michalliu/sourcebeautify.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'vim-scripts/vim-bemhtml'
+Plugin 'moll/vim-node'
 " Plugin 'MarcWeber/vim-addon-mw-utils'
 " Plugin 'tomtom/tlib_vim'
 " Plugin 'garbas/vim-snipmate'
@@ -41,6 +42,8 @@ let g:neocomplcache_enable_smart_case=1
 let g:neocomplcache_min_syntax_length=3
 let g:neocomplcache_enable_auto_select=1
 let g:neocomplcache_disable_auto_complete=1
+
+let g:syntastic_javascript_checkers = ['jshint']
 
 " Smart tab Behavior
 function! CleverTab()
@@ -90,6 +93,12 @@ let g:jsdoc_allow_input_prompt=1
 let javascript_enable_domhtmlcss=1
 let g:javascript_conceal=1
 let b:javascript_fold=1
+
+autocmd User Node
+  \ if &filetype == "javascript" |
+  \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
+  \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
+  \ endif
 
 set foldmethod=syntax
 set foldlevelstart=99
