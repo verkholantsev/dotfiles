@@ -100,6 +100,10 @@ autocmd User Node
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
   \ endif
 
+let g:ctrlp_custom_ignore = {
+  \  'dir': 'node_modules',
+  \ }
+
 set foldmethod=syntax
 set foldlevelstart=99
 let javaScript_fold=1
@@ -135,3 +139,6 @@ let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized
+
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
