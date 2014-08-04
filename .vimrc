@@ -18,17 +18,14 @@ Plugin 'maksimr/vim-jsbeautify'
 Plugin 'heavenshell/vim-jsdoc'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/tComment'
-" Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'michalliu/jsruntime.vim'
-" Plugin 'michalliu/jsoncodecs.vim'
-" Plugin 'michalliu/sourcebeautify.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'vim-scripts/vim-bemhtml'
 Plugin 'moll/vim-node'
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
-" Plugin 'garbas/vim-snipmate'
-" Plugin 'honza/vim-snippets'
+
+Plugin 'Shougo/neosnippet'
+Plugin 'honza/vim-snippets'
+
+Plugin 'mileszs/ack.vim'
 
 filetype plugin on
 
@@ -135,6 +132,8 @@ set showmatch
 set number
 set cursorline
 
+set backspace=indent,eol,start
+
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 set background=dark
@@ -142,3 +141,88 @@ colorscheme solarized
 
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+"-------------------------
+"" neosnippets
+"
+"
+" Enable snipMate compatibility
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+"
+" Disables standart snippets. We use vim-snippets bundle instead
+let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+"
+"  Expand snippet and jimp to next snippet field on Enter key.
+imap <expr><CR> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+
+" Cyrillic symbols binding
+map ё `
+map й q
+map ц w
+map у e
+map к r
+map е t
+map н y
+map г u
+map ш i
+map щ o
+map з p
+map х [
+map ъ ]
+map ф a
+map ы s
+map в d
+map а f
+map п g
+map р h
+map о j
+map л k
+map д l
+map ж ;
+map э '
+map я z
+map ч x
+map с c
+map м v
+map и b
+map т n
+map ь m
+map б ,
+map ю .
+map Ё ~
+map Й Q
+map Ц W
+map У E
+map К R
+map Е T
+map Н Y
+map Г U
+map Ш I
+map Щ O
+map З P
+map Х {
+map Ъ }
+map Ф A
+map Ы S
+map В D
+map А F
+map П G
+map Р H
+map О J
+map Л K
+map Д L
+map Ж :
+map Э "
+map Я Z
+map Ч X
+map С C
+map М V
+map И B
+map Т N
+map Ь M
+map Б <
+map Ю >
