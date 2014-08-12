@@ -27,6 +27,12 @@ Plugin 'honza/vim-snippets'
 
 Plugin 'mileszs/ack.vim'
 
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'editorconfig/editorconfig-vim'
+
+Plugin 'christoomey/vim-tmux-navigator'
+
 filetype plugin on
 
 autocmd BufNewFile,BufReadPost *.bem.tt2 set ft=bemhtml
