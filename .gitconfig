@@ -1,0 +1,22 @@
+[alias]
+        lg = "log --graph --format='format:%w(80)%Cgreen%h%Creset %Cred%d%Creset%n%s%n%Cgreen%an%Creset (%ar)%n'"
+        co = checkout
+        ci = commit
+        st = status
+        br = branch
+        dt = difftool
+
+[diff]
+    tool = vimdiff
+
+[color]
+    ui = auto
+
+[core]
+    editor = /usr/bin/vim
+
+[push]
+    default = current
+
+[merge]
+    tool = vimdiff
