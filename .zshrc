@@ -57,11 +57,13 @@ PLATFORM=$(uname)
 if [[ "$PLATFORM" == "Darwin" ]]; then
     source `brew --prefix`/etc/profile.d/z.sh
     export PATH=$HOMEBREW:$PATH
+elif [[ "$PLATFORM" == "Linux" ]]; then
+    source ~/Repos/z/z.sh
 else
     echo Unknown platform $PLATFORM
 fi
 
-export PATH=$HOMEBREW:$NODE_MODULES:$LOCAL_BIN:$PATH
+export PATH=$NODE_MODULES:$LOCAL_BIN:$PATH
 
 function new-tmux-from-dir-name {
     tmux new-session -As `basename $PWD`
