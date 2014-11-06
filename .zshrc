@@ -41,7 +41,11 @@ ZSH_THEME="gentoo"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git sublime npm node brew jsontools)
+plugins=(git sublime npm node brew jsontools zsh-syntax-highlighting)
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor line pattern root)
+
+source `brew --prefix`/etc/profile.d/z.sh
 
 source $ZSH/oh-my-zsh.sh
 
