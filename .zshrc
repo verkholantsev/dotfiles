@@ -45,7 +45,6 @@ plugins=(git sublime npm node brew jsontools zsh-syntax-highlighting)
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor line pattern root)
 
-source `brew --prefix`/etc/profile.d/z.sh
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,6 +52,14 @@ source $ZSH/oh-my-zsh.sh
 HOMEBREW=/usr/local/bin:/usr/local/sbin
 NODE_MODULES=./node_modules/.bin
 LOCAL_BIN=$HOME/local/bin
+PLATFORM=$(uname)
+
+if [[ "$PLATFORM" == "Darwin" ]]; then
+    source `brew --prefix`/etc/profile.d/z.sh
+    export PATH=$HOMEBREW:$PATH
+else
+    echo Unknown platform $PLATFORM
+fi
 
 export PATH=$HOMEBREW:$NODE_MODULES:$LOCAL_BIN:$PATH
 
