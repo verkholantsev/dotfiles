@@ -11,6 +11,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'sickill/vim-monokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'einars/js-beautify'
@@ -46,39 +47,26 @@ let g:neocomplcache_min_syntax_length=3
 let g:neocomplcache_enable_auto_select=1
 let g:neocomplcache_disable_auto_complete=1
 
-let g:syntastic_javascript_checkers = ['jshint']
-
-" Smart tab Behavior
-function! CleverTab()
-    " If autocomplete window visible then select next item in there
-    if pumvisible()
-        return "\<C-n>"
-    endif
-    " If it's begining of the string then return just tab pressed
-    let substr = strpart(getline('.'), 0, col('.') - 1)
-    let substr = matchstr(substr, '[^ \t]*$')
-    if strlen(substr) == 0
-        " nothing to match on empty string
-        return "\<Tab>"
-    else
-        " If not begining of the string, and autocomplete popup is not visible
-        " Open this popup
-        return "\<C-x>\<C-u>"
-    endif
-endfunction
-inoremap <expr><TAB> CleverTab()
+let g:syntastic_javascript_checkers = ['jsxhint', 'jscs']
+let g:syntastic_aggregate_errors = 1
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 let g:airline_theme='understated'
-let g:airline_left_sep='▶'
-let g:airline_right_sep='◀'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#show_buffers=0
 
 set completeopt-=preview
+
+if exists('$TMUX')
+    set term=screen-256color
+endif
+let &t_Co=256
+
+set background=dark
+colorscheme monokai
 
 nmap <silent><leader>gb :.Gblame<cr>
 vmap <silent><leader>gb :Gblame<cr>
@@ -87,9 +75,6 @@ nmap <silent><leader>td :TernDef<cr>
 nmap <silent><leader>tr :TernRefs<cr>
 nmap <silent><leader>f :NERDTreeFind<cr>
 nmap <silent><leader>nt :tabnew<cr>
-
-let g:multi_cursor_next_key='<C-f>'
-let g:multi_cursor_quit_key='<Esc>'
 
 let g:jsdoc_allow_input_prompt=1
 
@@ -118,7 +103,6 @@ set autoread
 set ttyfast
 set encoding=utf-8
 set termencoding=utf-8
-set t_Co=256
 
 set tabstop=4
 set shiftwidth=4
@@ -139,11 +123,6 @@ set number
 set cursorline
 
 set backspace=indent,eol,start
-
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-set background=dark
-colorscheme solarized
 
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"

@@ -57,6 +57,8 @@ PLATFORM=$(uname)
 if [[ "$PLATFORM" == "Darwin" ]]; then
     source `brew --prefix`/etc/profile.d/z.sh
     export PATH=$HOMEBREW:$PATH
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
 elif [[ "$PLATFORM" == "Linux" ]]; then
     source ~/Repos/z/z.sh
 else
@@ -66,17 +68,11 @@ fi
 export PATH=$NODE_MODULES:$LOCAL_BIN:$PATH
 
 function new-tmux-from-dir-name {
-    tmux new-session -As `basename $PWD`
+    tmux new-session -As `basename $PWD | sed s/\\\\./_/g`
 }
 
 export EDITOR="vim"
-export TERM="screen-256color-bce"
 
 alias tl="tmux ls"
 alias tn="new-tmux-from-dir-name"
 alias ta="tmux attach"
-
-alias ga="git add"
-alias gs="git status"
-alias gc="git commit"
-
