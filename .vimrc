@@ -66,7 +66,9 @@ endif
 let &t_Co=256
 
 set background=dark
-colorscheme monokai
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+colorscheme solarized
 
 nmap <silent><leader>gb :.Gblame<cr>
 vmap <silent><leader>gb :Gblame<cr>
