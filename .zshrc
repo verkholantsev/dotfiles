@@ -76,3 +76,5 @@ export EDITOR="vim"
 alias tl="tmux ls"
 alias tn="new-tmux-from-dir-name"
 alias ta="tmux attach"
+
+bindkey "^Q" push-input
