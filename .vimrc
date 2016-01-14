@@ -5,11 +5,11 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Plugin 'gmarik/vundle'
+Plugin 'christoomey/vim-system-copy'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'marijnh/tern_for_vim'
-Plugin 'Shougo/neocomplcache.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'sickill/vim-monokai'
 Plugin 'altercation/vim-colors-solarized'
@@ -41,14 +41,8 @@ autocmd BufNewFile,BufReadPost *.bem.tt2 set ft=bemhtml
 let mapleader=' '
 
 let g:acp_enableAtStartup=0
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_min_syntax_length=3
-let g:neocomplcache_enable_auto_select=1
-let g:neocomplcache_disable_auto_complete=1
 
-let g:syntastic_javascript_checkers = ['jsxhint', 'jscs']
-let g:syntastic_aggregate_errors = 1
+let g:syntastic_javascript_checkers = ['jshint', 'eslint', 'jscs']
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -122,9 +116,12 @@ set list
 set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~
 set showmatch
 set number
+set relativenumber
 set cursorline
 
 set backspace=indent,eol,start
+
+set foldmethod=manual
 
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -150,6 +147,14 @@ let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
 "  Expand snippet and jimp to next snippet field on Enter key.
 imap <expr><CR> neosnippet#expandable_or_jumpable() ?
  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+
+" Abbreviations
+
+abbr fn function
+abbr rt return
+abbr cl console.log
+abbr clj console.log(JSON.stringify(x, null, 4));
+abbr th throw new Error
 
 " Cyrillic symbols binding
 map ё `
@@ -218,3 +223,5 @@ map Т N
 map Ь M
 map Б <
 map Ю >
+
+let g:tern_map_keys=1
