@@ -45,10 +45,10 @@ plugins=(git sublime npm node brew jsontools zsh-syntax-highlighting)
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor line pattern root)
 
-
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+ssh-add ~/.ssh/id_rsa
 HOMEBREW=/usr/local/bin:/usr/local/sbin
 NODE_MODULES=./node_modules/.bin
 LOCAL_BIN=$HOME/local/bin
@@ -75,6 +75,6 @@ export EDITOR="vim"
 
 alias tl="tmux ls"
 alias tn="new-tmux-from-dir-name"
-alias ta="tmux attach"
+alias ta="tmux attach -d"
 
 bindkey "^Q" push-input
