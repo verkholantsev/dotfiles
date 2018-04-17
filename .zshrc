@@ -48,6 +48,12 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor line pattern root)
 source $ZSH/oh-my-zsh.sh
 
 RPROMPT="<- $(date '+%H:%M %d/%m/%y')"
+autoload -U add-zsh-hook
+add-zsh-hook zshaddhistory update_rprompt
+
+function update_rprompt() {
+    RPROMPT="<- $(date '+%H:%M %d/%m/%y')"
+}
 
 # Customize to your needs...
 ssh-add ~/.ssh/id_rsa
