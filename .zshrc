@@ -77,7 +77,13 @@ function _append_to_path() {
   fi
 }
 
-ssh-add ~/.ssh/id_rsa
+function _execute_if_file_exists() {
+    if [ -f "$1" ]; then
+        source "$1";
+    fi
+}
+
+ssh-add ~/.ssh/id_rsa 2>/dev/null
 HOMEBREW_BIN_DIR=/usr/local/bin:/usr/local/sbin
 NODE_MODULES=./node_modules/.bin
 LOCAL_BIN_DIR=$HOME/local/bin
@@ -149,10 +155,7 @@ fi
     # --color fg:-1,bg:-1,hl:33,fg+:235,bg+:254,hl+:33
     # --color info:136,prompt:136,pointer:234,marker:234,spinner:136
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [[ -f "$HOME"/.zshrc_local ]]; then
-    source "$HOME"/.zshrc_local
-fi
+_execute_if_file_exists "$HOME"/.fzf_zsh
+_execute_if_file_exists "$HOME"/.zshrc_local
 
 # zprof
