@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 
+" List of plugins --- {{{
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -26,16 +27,16 @@ Plug 'duganchen/vim-soy'
 Plug 'mattn/emmet-vim'
 Plug 'galooshi/vim-import-js'
 call plug#end()
+" }}}
 
 filetype plugin on
 
-""" Plugins related stuff
-
-""" pangloss/vim-javascript
+" pangloss/vim-javascript --- {{{
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
+" }}}
 
-""" nathanaelkane/vim-indent-guides
+" nathanaelkane/vim-indent-guides --- {{{
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
@@ -46,8 +47,14 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 " 2. https://commons.wikimedia.org/wiki/File:Xterm_256color_chart.svg
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
+" }}}
 
-""" junegunn/fzf.vim
+" flowtype/vim-flow --- {{{
+let g:flow#enable = 1
+let g:flow#autoclose = 1
+" }}}
+
+" junegunn/fzf.vimw --- {{{
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -84,15 +91,17 @@ let g:fzf_colors =
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+" }}}
 
-""" moll/vim-node
+" moll/vim-node --- {{{
 autocmd User Node
   \ if &filetype == "javascript" |
   \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
   \ endif
+" }}}
 
-""" w0rp/ale
+" w0rp/ale --- {{{
 let g:ale_fix_on_save = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_javascript_prettier_use_local_config = 1
@@ -113,13 +122,14 @@ let g:ale_fixers = {
 \       'prettier',
 \   ]
 \}
+" }}}
 
-""" itchyny/lightline.vim
+" itchyny/lightline.vim --- {{{
 let g:lightline = {
 \ 'colorscheme': 'Dracula',
 \ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'fileformat', 'fileencoding', 'charvaluehex', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\   'left': [['mode', 'paste'], ['filename', 'gitbranch', 'filetype', 'modified']],
+\   'right': [['fileformat', 'fileencoding'], ['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
 \ },
 \ 'component_expand': {
 \   'linter_warnings': 'LightlineLinterWarnings',
@@ -130,6 +140,9 @@ let g:lightline = {
 \   'readonly': 'error',
 \   'linter_warnings': 'warning',
 \   'linter_errors': 'error'
+\ },
+\ 'component_function': {
+\   'gitbranch': 'fugitive#head'
 \ },
 \ }
 
@@ -162,12 +175,38 @@ function! s:MaybeUpdateLightline()
     call lightline#update()
   end
 endfunction
+" }}}
 
-""" mattn/emmet-vim
+" mattn/emmet-vim --- {{{
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+" }}}
 
-""" Other settings
+" Settings --- {{{
+syntax enable
+set showtabline=0
+set synmaxcol=256
+set ttyfast
+set termencoding=utf-8
+
+set colorcolumn=119
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+
+set hlsearch
+set noshowmode
+set title
+set list
+set showmatch
+set number
+set cursorline
+set linebreak
+
+set foldlevelstart=99
+set foldmethod=manual
 
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
@@ -175,9 +214,9 @@ let &t_Co=256
 set termguicolors
 set background=dark
 colorscheme dracula
+" }}}
 
-autocmd BufNewFile,BufReadPost *.flow set ft=javascript
-
+" Mappings --- {{{
 let mapleader=' '
 
 nmap <silent><leader>gb :.Gblame<cr>
@@ -201,38 +240,26 @@ nmap <silent><leader>h :Dash<cr>
 nmap <silent>q :cclose<cr>
 nmap <silent>]q :cnext<cr>
 nmap <silent>[q :cprev<cr>
-
-let g:flow#enable = 1
-let g:flow#autoclose = 1
+nnoremap <silent><cr> :nohlsearch<cr><cr>
 
 nmap <silent><C-p> :Files<cr>
 nmap ; :Buffers<CR>
+" }}}
 
-syntax enable
-set showtabline=0
-set synmaxcol=256
-set ttyfast
-set termencoding=utf-8
+" Autocommands for filetypes --- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim execute "normal zM"
+augroup END
 
-set foldlevelstart=99
-set foldmethod=manual
-set colorcolumn=119
+augroup filetype_javascript
+    autocmd!
+    autocmd BufNewFile,BufReadPost *.flow set ft=javascript
+augroup END
+" }}}
 
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-
-set hlsearch
-nnoremap <silent><cr> :nohlsearch<cr><cr>
-set noshowmode
-set title
-set list
-set showmatch
-set number
-set cursorline
-set linebreak
-
+" Cursor in tmux --- {{{
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
@@ -240,5 +267,6 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+" }}}
 
 nmap \r :!tmux send-keys -t 0 C-p C-j <CR><CR>
