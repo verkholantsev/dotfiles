@@ -256,6 +256,7 @@ augroup END
 augroup filetype_javascript
     autocmd!
     autocmd BufNewFile,BufReadPost *.flow set ft=javascript
+    autocmd FileType javascript setlocal foldmethod=syntax
 augroup END
 " }}}
 
