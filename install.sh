@@ -2,7 +2,7 @@
 
 set -eu
 
-FILES_TO_LINK=$(find . -maxdepth 1 | sed 's/^\.\///g' | grep -Ev "^\\.$|^\\.\\.$|^\\.git$|^install\\.sh$|.+\\.terminfo")
+FILES_TO_LINK=$(find . -maxdepth 1 | sed 's/^\.\///g' | grep -Ev "^\\.$|^\\.\\.$|^\\.git$|^install\\.sh$|.+\\.terminfo|^LICENSE$|^README.md$")
 
 for FILE in $FILES_TO_LINK
 do
