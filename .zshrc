@@ -114,7 +114,7 @@ else
     echo Unknown platform $PLATFORM
 fi
 
-export PATH=$NODE_MODULES:$LOCAL_BIN_DIR:$PATH
+export PATH=$LOCAL_BIN_DIR:$PATH:$NODE_MODULES
 
 export EDITOR="vim"
 
